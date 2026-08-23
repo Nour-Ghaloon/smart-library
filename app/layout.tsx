@@ -7,14 +7,10 @@ export const metadata: Metadata = {
   description: "منصة إلكترونية تتيح استكشاف وحجز الكتب والموارد التعليمية",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="antialiased bg-gray-50 text-gray-900 font-sans">
+      <body className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
         <Navbar />
         {children}
       </body>
