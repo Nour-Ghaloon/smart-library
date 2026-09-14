@@ -13,7 +13,7 @@ export default function HomePage() {
               <span>نظام إدارة واستعارة الكتب الذكي</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-3">
-              منصة المكتبة الرقمية المركزية
+               المكتبة الرقمية المركزية
             </h1>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               ابحث في المراجع المتاحة، استعرض الأقسام التخصصية، وقدم طلبات الاستعارة بسهولة.

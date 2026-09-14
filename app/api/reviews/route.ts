@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-// مصفوفة مؤقتة لتخزين المراجعات في الذاكرة
 let reviews: { bookId: string; user: string; comment: string; rating: number }[] = [
   {
     bookId: "1",

@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "نظام إدارة المكتبة الذكية",
+  title: "المكتبة الذكية",
   description: "منصة إلكترونية تتيح استكشاف وحجز الكتب والموارد التعليمية",
 };
 
