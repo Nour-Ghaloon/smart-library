@@ -72,7 +72,7 @@ export default function AddReviewForm({ bookId }: { bookId: string }) {
         </div>
       )}
 
-      {/* Name Input */}
+      {}
       <div>
         <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
           الاسم الكامل
@@ -90,7 +90,7 @@ export default function AddReviewForm({ bookId }: { bookId: string }) {
         </div>
       </div>
 
-      {/* Interactive Star Rating Selector */}
+      {}
       <div>
         <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
           تقييمك للمرجع
@@ -123,7 +123,7 @@ export default function AddReviewForm({ bookId }: { bookId: string }) {
         </div>
       </div>
 
-      {/* Comment Input */}
+      {}
       <div>
         <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
           التعليق والملاحظات
@@ -138,7 +138,7 @@ export default function AddReviewForm({ bookId }: { bookId: string }) {
         ></textarea>
       </div>
 
-      {/* Submit Button */}
+      {}
       <button
         type="submit"
         disabled={loading}

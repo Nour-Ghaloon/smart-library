@@ -11,7 +11,8 @@ import {
   BookOpen, 
   CheckCircle2, 
   XCircle, 
-  AlertCircle 
+  AlertCircle, 
+  RotateCcw
 } from "lucide-react";
 import AddReviewForm from "@/app/components/AddReviewForm";
 
@@ -60,20 +61,35 @@ export default function BookDetailPage() {
     );
   }
 
-  const handleBorrow = () => {
-    try {
-      const existing = JSON.parse(localStorage.getItem("borrowedBooks") || "[]");
-      const stringId = String(book.id);
+ // دالة الاستعارة
+const handleBorrow = () => {
+  try {
+    const existing = JSON.parse(localStorage.getItem("borrowedBooks") || "[]");
+    const stringId = String(book.id);
 
-      if (!existing.map(String).includes(stringId)) {
-        const updated = [...existing, book.id];
-        localStorage.setItem("borrowedBooks", JSON.stringify(updated));
-      }
-      setBorrowed(true);
-    } catch (e) {
-      console.error("خطأ في حفظ الاستعارة:", e);
+    if (!existing.map(String).includes(stringId)) {
+      const updated = [...existing, book.id];
+      localStorage.setItem("borrowedBooks", JSON.stringify(updated));
     }
-  };
+    setBorrowed(true);
+  } catch (e) {
+    console.error("خطأ في حفظ الاستعارة:", e);
+  }
+};
+
+// دالة إرجاع الكتاب مباشرة من صفحة التفاصيل
+const handleReturn = () => {
+  try {
+    const existing: (string | number)[] = JSON.parse(
+      localStorage.getItem("borrowedBooks") || "[]"
+    );
+    const updated = existing.filter((id) => String(id) !== String(book.id));
+    localStorage.setItem("borrowedBooks", JSON.stringify(updated));
+    setBorrowed(false);
+  } catch (e) {
+    console.error("خطأ في إرجاع الكتاب:", e);
+  }
+};
 
   return (
     <main className="min-h-screen py-10 px-6 bg-slate-50/50 dark:bg-slate-950 text-right transition-colors duration-300" dir="rtl">
@@ -132,20 +148,32 @@ export default function BookDetailPage() {
               {}
               <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
                 {mounted && borrowed ? (
-                  <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 p-4 rounded-xl flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                      <span className="text-xs font-bold">
-                        تم تقديم طلب استعارة هذا الكتاب بنجاح!
-                      </span>
-                    </div>
-                    <Link
-                      href="/my-books"
-                      className="text-xs font-bold underline text-emerald-700 dark:text-emerald-400 hover:opacity-80 whitespace-nowrap"
-                    >
-                      عرض في كتبي
-                    </Link>
-                  </div>
+  <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div className="flex items-center gap-2">
+      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+      <span className="text-xs font-bold">
+        هذا الكتاب مستعار حالياً لديك!
+      </span>
+    </div>
+    
+    <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+      <Link
+        href="/my-books"
+        className="text-xs font-bold underline text-emerald-700 dark:text-emerald-400 hover:opacity-80 whitespace-nowrap"
+      >
+        عرض في كتبي
+      </Link>
+      
+      <button
+        type="button"
+        onClick={handleReturn}
+        className="bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/50 dark:hover:bg-rose-900 text-rose-700 dark:text-rose-300 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+      >
+        <RotateCcw className="w-3.5 h-3.5" />
+        <span>إرجاع الكتاب</span>
+      </button>
+    </div>
+  </div>
                 ) : (
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between text-xs font-medium">
